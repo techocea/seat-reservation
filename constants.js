@@ -120,7 +120,7 @@ export const busSeatData = [
   {id: 'A16', status: 'Available', price: '1600'},
   {id: 'A18', status: 'Available', price: '1600'},
 
-]
+];
 
 export default busSeatData;
 

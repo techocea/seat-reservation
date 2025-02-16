@@ -4,6 +4,10 @@ import TopLayout from '../layout/TopLayout';
 import RootLayout from '../layout/RootLayout';
 import Warning from '../components/Warning';
 import BusSeat from './BusSeat';
+import ToggleBtn from '../components/ToggleBtn';
+import Amenities from '../components/Amenities';
+import ReservationPolicy from '../components/ReservationPolicy';
+import BusImage from '../components/BusImage';
 
 const Detail = () => {
   // show the warning message
@@ -29,7 +33,38 @@ const Detail = () => {
 
         {/* Bus Details */}
         <div className='w-full flex items-center justify-center flex-col gap-8 text-center'>
-          {/* Bus details content */}
+          {/* Short Description about bus */}
+          <p className='text-base text-neutral-500 font-normal text-justify'>
+            This is just a sample text.
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat aliquam corporis reiciendis voluptates consectetur aspernatur fuga unde quo nostrum. Itaque laborum quasi sint eligendi assumenda recusandae earum amet perferendis minima.
+            <span className='text-lg text-neutral-600 font-medium ml-2'>Want to see more about the bus?</span>
+          </p>
+
+
+          {/* Button */}
+          <div className='w-full items-center justify-center gap-6 flex-col'>
+
+            <ToggleBtn buttonText={"See Bus Details"} buttonTextHidden={"Hide Bus Details"}>
+              <div className='w-full space-y-10'>
+
+                {/* Reservation policy and amenities */}
+                <div className='w-full grid grid-cols-7 gap-20'>
+
+                  {/* Amenities */}
+                  <Amenities/>
+
+                  {/* Reservation Policy */}
+                  <ReservationPolicy/>
+                </div>
+
+
+                {/* Bus Images */}
+                  <BusImage/>
+              </div>
+            </ToggleBtn>
+          </div>
+
+
         </div>
       </RootLayout>
     </div>

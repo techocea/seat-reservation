@@ -8,7 +8,7 @@ function AboutUs({ theme, setTheme }) {
     }`}
   >
     <div
-      className={`py-10 lg:py-24 lg:max-w-6xl flex flex-col gap-y-4 text-justify justify-start items-center px-16 ${
+      className={`py-10 lg:py-16 lg:max-w-6xl flex flex-col gap-y-4 justify-start items-center px-4 lg:px-16 ${
         theme === "light" ? "bg-cyan-500" : "bg-white"
       }`}
     >
@@ -21,7 +21,7 @@ function AboutUs({ theme, setTheme }) {
       </h1>
       <p
         className={` text-lg ${
-          theme === "light" ? "text-gray-300" : "text-gray-400"
+          theme === "light" ? "text-gray-300" : "text-gray-600"
         }`}
       >
         We are a dynamic team of five enthusiastic first-year university
@@ -41,7 +41,7 @@ function AboutUs({ theme, setTheme }) {
           </h2>
           <p
             className={`text-lg ${
-              theme === "light" ? "text-gray-700" : "text-gray-400"
+              theme === "light" ? "text-gray-700" : "text-gray-600"
             }`}
           >
             As a group of aspiring developers, we bring diverse skills and fresh
@@ -62,7 +62,7 @@ function AboutUs({ theme, setTheme }) {
           </h2>
           <p
             className={`text-lg ${
-              theme === "light" ? "text-gray-700" : "text-gray-400"
+              theme === "light" ? "text-gray-700" : "text-gray-600"
             }`}
           >
             Our goal is to build a user-friendly, secure, and intuitive system
@@ -75,7 +75,7 @@ function AboutUs({ theme, setTheme }) {
 
         <div>
           <h2
-            className={`text-2xl font-semibold mb-4 ${
+            className={`text-2xl max-lg:text-center font-semibold mb-4 ${
               theme === "light" ? "text-black" : "text-black"
             }`}
           >
@@ -90,7 +90,7 @@ function AboutUs({ theme, setTheme }) {
               { name: "Lasni Seneviratne", img: "/5.jpg" },
             ].map((member, index) => (
               <div key={index} className="flex flex-col items-center">
-                <div className="w-24 h-24 bg-gray-400 rounded-full mb-4 overflow-hidden">
+                <div className="w-24 h-24 bg-gray-600 rounded-full mb-4 overflow-hidden">
                   <img
                     src={member.img}
                     alt={member.name}
@@ -99,7 +99,7 @@ function AboutUs({ theme, setTheme }) {
                 </div>
                 <p
                   className={`text-lg ${
-                    theme === "light" ? "text-black" : "text-gray-400"
+                    theme === "light" ? "text-black" : "text-gray-600"
                   }`}
                 >
                   {member.name}

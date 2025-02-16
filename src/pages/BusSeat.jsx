@@ -4,6 +4,7 @@ import busSeatData from '/constants';
 import { MdOutlineChair } from 'react-icons/md';
 import { RiMoneyRupeeCircleLine } from 'react-icons/ri';
 import { Link } from "react-router-dom";
+import ErrorMessage from '../components/ErrorMessage';
 // import Busease from "/pages/Busease.jsx";
 
 const BusSeat = () => {
@@ -15,7 +16,9 @@ const BusSeat = () => {
   const handleSeatClick = (seatId) => {
     // If the seat is already booked, ignore the click
     const selectedSeats = busSeatData.find((seat) => seat.id === seatId);
-    if (selectedSeats.status.toLowerCase() === 'Booked') return; // do nothing
+    if (selectedSeats.status.toLowerCase() === 'Booked') {
+        return
+    }; // do nothing
 
     // if the seat is available, select it
     setSelectedSeats((prevSelectedSeats) => {
@@ -45,13 +48,15 @@ const BusSeat = () => {
   }, [showError]);
 
   //function to determine seat class on status
-  const getSeatName = (seat) => {
-        if(seat.status === 'Booked'){
-            return 'text-primary cursor-not-allowed'; //Books seat unavailable
-        }if(selectedSeats.includes(seat.id)){
-            return 'text-yellow-600 cursor-pointer'; //Books selected seat
-        }return 'text-neutral-500 cursor-pointer'; //Books seat available
-  };
+  const getSeatName = (seat, selectedSeats) => {
+    if (seat.status === 'Booked') {
+        return 'text-primary cursor-not-allowed'; // Booked seat (unavailable)
+    }
+    if (selectedSeats.includes(seat.id)) {
+        return 'text-yellow-600 cursor-pointer'; // Selected seat
+    }
+    return 'text-neutral-500 cursor-pointer'; // Available seat
+};
 
   return (
     <div className='w-full grid grid-cols-5 gap-10'>
@@ -193,23 +198,24 @@ const BusSeat = () => {
                                 Non-refundable
                             </div>
                         </div>
-                        {
-                            selectedSeats.length > 0
-                                ?
-                                <div className='w-full flex items-center gap-x-3'>
-                                    {selectedSeats.map((seatId) => {
-                                        return (
-                                            <div key={seatId} className='w-9 h-9 bg-neutral-200/80 rounded-lg flex items-center justify-center text-base text-neutral-700 font-semibold'>
-                                                {seatId}
-                                            </div>
-                                        )
-                                    })}
-                                </div>
-                                :
-                                <div className='w-full flex items-center gap-x-3'>
-                                    <p className='text-sm text-neutral-500 font-normal'>No Seats Selected</p>
-                                </div>
-                        }
+                        {selectedSeats.length > 0 ? 
+        <div className="w-full flex items-center gap-x-3">
+            {selectedSeats.map((seatId) => {
+                return (
+                    <div
+                    key={seatId}
+                    className="w-9 h-9 bg-neutral-200/80 rounded-lg flex items-center justify-center text-base text-neutral-700 font-semibold"
+                >
+                    {seatId}
+                </div>
+                )
+                })}
+        </div>
+    : 
+    <div className="w-full flex items-center gap-x-3">
+        <p className="text-sm text-neutral-500 font-normal">No Seats Selected</p>
+    </div>
+    }
         </div>
 
         <div className='w-full space-y-2'>
@@ -232,11 +238,10 @@ const BusSeat = () => {
                                 </div>
 
                                 {/* Calculating the total Price */}
-
                                 <p className='text-base text-neutral-600 font-semibold'>
                                     Rs {" "}
                                     {selectedSeats.reduce((total, seatId) => {
-                                        const seat = busSeatData.find(busSeat => busSeat.id === seat.Id);
+                                        const seat = busSeatData.find(busSeat => busSeat.id === seatId);
                                         return total + (seat ? seat.price : 0); //if seat is not found, price is 0
                                     }, 0)}
                                 </p>
@@ -244,10 +249,28 @@ const BusSeat = () => {
                         
         </div>
 
-        <div className='w-full flex items-center justify-center'></div>
+        <div className='w-full flex items-center justify-center'>
+            {
+                selectedSeats.length > 0? 
+                <Link to="/busease/checkout" className='w-full bg-primary hover:bg-blue-200 text-sm text-neutral-50 font-normal py-2.5 flex items-center justify-center uppercase rounded-lg transition'>Processed to Checkout</Link>  // Button enabled if seats are selected
+                : 
+                <div className='w-full space-y-0.5'>
+                    <button disabled className='w-full bg-primary hover:bg-blue-200 text-sm text-neutral-50 font-normal py-2.5 flex items-center justify-center uppercase rounded-lg transition cursor-not-allowed'>Processed to Checkout</button>
+                    <small className='text-sm text-neutral-600 font-normal px-1'>
+                        Select at least one seat to proceed to checkout page.
+                    </small>
+                </div> 
+            }
+        </div>
 
       </div>
+      {/* // show error message if more than 10 seats are selected */}
+
+      {showError && <ErrorMessage message={"You can't select more than 10 seat"}/>}
     </div>
+    
+    
+
   );
 };
 
