@@ -1,3 +1,5 @@
+import React from "react";
+import ReactDOM from "react-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { createRoot } from "react-dom/client";
 import "./index.css";
@@ -18,26 +20,28 @@ import Invoice from "./pages/Invoice.jsx";
 import Found from "./pages/Found.jsx";
 import Lost from "./pages/Lost.jsx";
 
-createRoot(document.getElementById("root")).render(
-  <BrowserRouter>
-    <HeroUIProvider>
-      <Header />
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/busease" element={<Busease />} />
-        <Route path="/faq" element={<FAQ />} />
-        <Route path="/lost-n-found" element={<LostandFound />} />
-        <Route path="/lost-n-found/lost" element={<Lost />} />
-        <Route path="/lost-n-found/found" element={<Found />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/reservation" element={<Reservation />} />
-        <Route path="/busease/seat" element={<Detail />} />
-        <Route path="/busease/checkout" element={<Checkout />} />
-        <Route path="/busease/payment" element={<Invoice />} />
-      </Routes>
-      <Footer/>
-    </HeroUIProvider>
-  </BrowserRouter>
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <HeroUIProvider>
+        <Header />
+        <Routes>
+          <Route path="/" element={<App />} />
+          <Route path="/busease" element={<Busease />} />
+          <Route path="/faq" element={<FAQ />} />
+          <Route path="/lost-n-found" element={<LostandFound />} />
+          <Route path="/lost-n-found/lost" element={<Lost />} />
+          <Route path="/lost-n-found/found" element={<Found />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/reservation" element={<Reservation />} />
+          <Route path="/busease/seat" element={<Detail />} />
+          <Route path="/busease/checkout" element={<Checkout />} />
+          <Route path="/busease/payment" element={<Invoice />} />
+        </Routes>
+        <Footer />
+      </HeroUIProvider>
+    </BrowserRouter>
+  </React.StrictMode>
 );
